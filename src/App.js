@@ -1,24 +1,37 @@
-import logo from "./logo.svg";
-import "./App.css";
+// src/components/Router.js
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer">
-          Learn Reacthello  
-        </a>
-      </header>
+    <div>
+      dsfdds
+      <Router>
+        <Routes>
+          <Route path="/" exact component={Home} />
+          <Route path="/page2" component={Page2} />
+        </Routes>
+      </Router>
     </div>
   );
 }
 
 export default App;
+
+const Home = () => {
+  return (
+    <div>
+      <h1>Home Page</h1>
+      {/* Add your home page content here */}
+    </div>
+  );
+};
+
+const Page2 = () => {
+  return (
+    <div>
+      <h1>Page 2</h1>
+      {/* Add your second page content here */}
+    </div>
+  );
+};
