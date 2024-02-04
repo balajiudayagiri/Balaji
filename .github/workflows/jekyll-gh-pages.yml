@@ -33,10 +33,13 @@ jobs:
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./
+          source: ./build
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
+        with:
+          artifact-name: web-app   # Adjust this line to give a meaningful name to your artifact
+          path: ./build            # Adjust this line to point to the correct source directory
 
   # Deployment job
   deploy:
@@ -49,3 +52,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          source: web-app
