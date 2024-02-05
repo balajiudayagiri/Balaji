@@ -9,20 +9,19 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    steps: 
+    steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Set up Git identity
         run: |
-          git config --global user.name "Balaji"
+          git config --global user.name "balajiudayagiri"
           git config --global user.email "balu.udy@gmail.com"
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v1
         with:
           node-version: "16"
-
 
       - name: Install Dependencies
         run: npm install
@@ -38,8 +37,6 @@ jobs:
         
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        if: success()
         with:
-          github_token: ${{ secrets.TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-          publish_branch: gh-pages
