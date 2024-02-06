@@ -33,6 +33,7 @@ export default function Header() {
         window.removeEventListener("scroll", controlNavbar);
       };
     }
+    // eslint-disable-next-line
   }, [lastScrollY]);
   return (
     <header
