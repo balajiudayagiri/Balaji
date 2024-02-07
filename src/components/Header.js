@@ -37,10 +37,10 @@ export default function Header() {
   }, [lastScrollY]);
   return (
     <header
-      className={`flex justify-between fixed top-0 xl:px-36 lg:px-32 md:px-24 sm:px-16 px-11 py-10 left-0 w-full bg-transparent transition-transform duration-300 ${
+      className={`z-10 flex justify-between fixed top-0 xl:px-36 lg:px-32 md:px-24 sm:px-16 px-11 py-10 left-0 w-full bg-transparent transition-transform duration-300 ${
         !isVisible && "-translate-y-full"
       }`}>
-      <Link to="/">
+      <Link to="/" className="hover:scale-125 transition cursor-pointer">
         <img
           src={PicImage}
           height={40}

@@ -1,38 +1,31 @@
 import React from "react";
 import HeroPage from "./HeroSection";
-import Html5ColoredIcon from "../Icons/Html5ColoredIcon";
-import Css3ColoredIcon from "../Icons/Css3ColoredIcon";
-import JavascriptColoredIcon from "../Icons/JavascriptColoredIcon";
-import ReactColoredIcon from "../Icons/ReactColoredIcon";
-import ReactRouterColoredIcon from "../Icons/ReactRoterColoredIcon";
-import ReduxIcon from "../Icons/ReduxIcon";
-import TypeScriptIcon from "../Icons/TypeScriptIcon";
-import MUI_Icon from "../Icons/MUIIcon";
-import TailwindIcon from "../Icons/TailwindIcon";
-import BootstrapIcon from "../Icons/BootstrapIcon";
-import GithubIcon from "../Icons/GithubIcon";
+import { articles } from "../userInfo";
 
 const Home = () => {
   return (
     <div>
       <HeroPage />
-      <h2>Home</h2>
-      <p>Welcome to the home page!</p>
-      <marquee className="text-white flex">
-        <div className="flex gap-16">
-          <Html5ColoredIcon height={"130px"} width={"100px"} />
-          <Css3ColoredIcon height={"130px"} width={"100px"} />
-          <JavascriptColoredIcon height={"130px"} width={"100px"} />
-          <ReactColoredIcon height={"130px"} width={"100px"} />
-          <TypeScriptIcon height={"130px"} width={"100px"} />
-          <ReactRouterColoredIcon height={"130px"} width={"100px"} />
-          <ReduxIcon height={"130px"} width={"100px"} />
-          <MUI_Icon height={"130px"} width={"100px"} />
-          <TailwindIcon height={"130px"} width={"100px"} />
-          <BootstrapIcon height={"130px"} width={"100px"} />
-          <GithubIcon height={"130px"} width={"100px"} />
-        </div>
-      </marquee>
+      <div className=" flex flex-wrap mt-14 justify-between gap-9">
+        {articles.map((item, index) => {
+          return (
+            <div
+              key={`${item.title.split(" ")[0]}_${index}`}
+              className={
+                "relative hover:scale-110 hover:z-[5] transition xl:w-[47%] lg:w-[47%] md:w-[47%] sm:w-full bg-zinc-900 p-10 rounded-lg mb-5 border-solid border-2 border-zinc-700 text-white "
+              }>
+              <h1 className="text-lg">{item.title}</h1>
+              <p className="relative z-[2] mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+                {item.summary}
+              </p>
+              <div
+                className={`absolute xl:-top-10 lg:-top-10 md:-top-10 sm:-top-10  xl:-right-10 lg:-right-10 md:-right-10 sm:-right-10 -top-5 -right-5`}>
+                {item.icon}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
