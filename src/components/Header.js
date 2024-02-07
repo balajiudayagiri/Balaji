@@ -16,12 +16,15 @@ export default function Header() {
 
   const controlNavbar = () => {
     if (typeof window !== "undefined") {
-      if (window.scrollY > lastScrollY) {
-        setIsVisible(false);
+      const scrollY = window.scrollY;
+
+      if (scrollY > lastScrollY && scrollY > 100) {
+        setIsVisible(false); // Scroll down, and the scroll position is beyond 100 pixels
       } else {
-        setIsVisible(true);
+        setIsVisible(true); // Scroll up or at the top
       }
-      setLastScrollY(window.scrollY);
+
+      setLastScrollY(scrollY);
     }
   };
 
