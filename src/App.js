@@ -4,7 +4,7 @@ import Header from "./components/Header";
 
 export default function App() {
   return (
-    <div className="relative pt-[120px] mx-auto w-10/12">
+    <div className="relative pt-[120px] mx-auto sm:w-10/12 w-[93%]">
       <Header />
       <Outlet />
     </div>
