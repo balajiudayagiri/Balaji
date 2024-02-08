@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { navigation } from "../userInfo";
+import { navigation } from "../constants";
 import PicImage from "../assets/Balaji.png";
 import { Menu, Transition } from "@headlessui/react";
 import Bars3Icon from "../Icons/Bars3Icon";
