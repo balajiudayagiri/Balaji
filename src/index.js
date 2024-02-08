@@ -5,6 +5,12 @@ import reportWebVitals from "./reportWebVitals";
 import { router } from "./routes";
 import { RouterProvider } from "react-router-dom";
 
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.ready.then((registration) => {
+    registration.unregister();
+  });
+}
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
