@@ -2,39 +2,33 @@ import React from "react";
 import { calculateExperience } from "../utilitys";
 // import ReactColoredIcon from "../Icons/ReactColoredIcon";
 // import JavascriptColoredIcon from "../Icons/JavascriptColoredIcon";
-
+import myPic from "../assets/Balaji_about-Page.png";
 import "../App.css";
 const About = () => {
   return (
     <div className="text-gray-400 rounded-md shadow-md flex flex-col gap-3">
-      <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100 mb-8">
-        I&apos;m Balaji Udayagiri. I live in Hyderabad City, where I design my
-        world
-      </h1>
-
-      <p className="">
-        Welcome to my digital abode! I&apos;m Balaji, a software engineer with a
-        knack for transforming innovative ideas into tangible tech solutions. I
-        find joy in the elegant dance of code, creating applications that not
-        only function seamlessly but also bring a touch of delight to the user
-        experience.
-      </p>
-      <p>
-        Picture this: crafting pixel-perfect interfaces that make users go
-        &quot;Wow!&quot; Architecting frontend landscapes that are as robust as
-        they are beautiful. Solving complex problems with a mix of logic and
-        creativity. That&apos;s my playground. From React.js and Vue.js to the
-        intricacies of JavaScript and TypeScript, I&apos;ve got the tools and
-        the passion to bring ideas to life.
-      </p>
-      <hr className="my-5" />
-
-      <p>
-        What about mobile apps, you ask? Been there, done that! Cross-platform
-        wonders that not only function seamlessly but also captivate the mobile
-        audience.
-      </p>
-
+      <div className="flex flex-col-reverse gap-5 items-center justify-center md:flex-row mb-10">
+        <div className="w-full lg:w-1/2 relative">
+          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100 mb-8 md:text-5xl">
+            I&apos;m Balaji Udayagiri. I live in Hyderabad City, where I design
+            my world
+          </h1>
+          <p className="">
+            Welcome to my digital abode! I&apos;m Balaji, a software engineer
+            with a knack for transforming innovative ideas into tangible tech
+            solutions. I find joy in the elegant dance of code, creating
+            applications that not only function seamlessly but also bring a
+            touch of delight to the user experience.
+          </p>
+        </div>
+        <div className="ld:p-[100px] md:p-[50px] sm:p-[100px] p-[50px]">
+          <img
+            src={myPic}
+            className="p-10 w-full object-cover lg:object-center rounded-3xl bg-zinc-900 rotate-[10deg]"
+            alt="error_in_image_load"
+          />
+        </div>
+      </div>
       <p className=" sm:w-full bg-zinc-900 p-4 rounded-lg mb-5 border-solid border-2 border-zinc-700">
         My journey into the realm of software engineering kicked off{" "}
         {calculateExperience("November 2020")}, armed with a passion for all
