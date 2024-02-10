@@ -9,6 +9,10 @@ import Contact from "./components/Contact";
 import App from "./App";
 
 import ErrorPage from "./ErrorPage";
+import { Projects } from "./components/Projects";
+import ElementGenerator from "./components/ElementGenerator";
+import GradiantPage from "./components/GradiantPage";
+import ColorPage from "./components/ColorPage";
 
 export const router = createBrowserRouter([
   {
@@ -30,11 +34,25 @@ export const router = createBrowserRouter([
       },
       {
         path: "projects",
-        element: <Contact />,
-      },
-      {
-        path: "profile",
-        element: <Contact />,
+        element: <Projects />,
+        children: [
+          {
+            index: true,
+            element: <ElementGenerator />,
+          },
+          {
+            path: "elementgenerator",
+            element: <ElementGenerator />,
+          },
+          {
+            path: "gradientdisplay",
+            element: <GradiantPage />,
+          },
+          {
+            path: "colorsdisplay",
+            element: <ColorPage />,
+          },
+        ],
       },
     ],
   },
