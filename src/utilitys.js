@@ -21,3 +21,18 @@ export function calculateExperience(initialDate) {
 
   return experience < 1 ? "Less than 1 year" : `${experience}+ years`;
 }
+
+export const getFifthShades = (colors) => {
+  const fifthShades = [];
+
+  for (const colorCategory in colors) {
+    if (Object.prototype.hasOwnProperty.call(colors, colorCategory)) {
+      const colorShades = colors[colorCategory];
+      const fifthShade = colorShades[4]; // 5th shade is at index 4
+
+      fifthShades.push(fifthShade);
+    }
+  }
+
+  return fifthShades;
+};
