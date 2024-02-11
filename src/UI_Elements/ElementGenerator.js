@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import IFrameWrapper from "./IFrameWrapper";
 import { ColorPickerColors, elementOptions } from "../constants";
 import SearchSelect from "./SearchSelect";
@@ -19,10 +19,6 @@ const ElementGenerator = () => {
   const [selectedRadius, setSelectedRadius] = useState("medium");
   const [selectedSpacing, setSelectedSpacing] = useState("medium");
 
-  useEffect(() => {
-    setStyle(getStylesBasedOnOption());
-  }, [selectedOption, color, selectedRadius, selectedSpacing]);
-
   const handleOptionChange = (option) => {
     setSelectedOption(option);
   };
@@ -37,28 +33,31 @@ const ElementGenerator = () => {
   const handleRadiusChange = (radius) => {
     setSelectedRadius(radius);
   };
-
-  const getradius = {
-    none: "",
-    small: "4px",
-    medium: "8px",
-    large: "12px",
-    full: "9999px",
-  };
-
   const handleSpacingChange = (spacing) => {
     setSelectedSpacing(spacing);
   };
 
-  const getspacing = {
-    none: "",
-    small: "4px 8px",
-    medium: "8px 16px",
-    large: "16px 32px",
-    full: "32px 64px",
-  };
+  const getradius = useMemo(() => {
+    return {
+      none: "",
+      small: "4px",
+      medium: "8px",
+      large: "12px",
+      full: "9999px",
+    };
+  }, []);
 
-  const getStylesBasedOnOption = () => {
+  const getspacing = useMemo(() => {
+    return {
+      none: "",
+      small: "4px 8px",
+      medium: "8px 16px",
+      large: "16px 32px",
+      full: "32px 64px",
+    };
+  }, []);
+
+  const getStylesBasedOnOption = useCallback(() => {
     switch (selectedOption) {
       case "outline":
         return {
@@ -84,7 +83,18 @@ const ElementGenerator = () => {
       default:
         return {};
     }
-  };
+  }, [
+    selectedOption,
+    color,
+    selectedRadius,
+    selectedSpacing,
+    getradius,
+    getspacing,
+  ]);
+
+  useEffect(() => {
+    setStyle(getStylesBasedOnOption());
+  }, [getStylesBasedOnOption]);
 
   const transposeCode = (htmlCode, isReact = false) => {
     if (!isReact) {
@@ -141,35 +151,39 @@ const ElementGenerator = () => {
           />
         </div>
       </div>
+      <div className="flex flex-wrap gap-2">
+        <div>
+          <ColorPicker
+            colors={ColorPickerColors}
+            defaultColor={color}
+            onChange={(color) => setColor(color)}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <div>
+            <SelectOptions
+              options={["outline", "filled", "text"]}
+              selectedOption={selectedOption}
+              onChange={handleOptionChange}
+            />
+          </div>
+          <div>
+            <RadiusSelector
+              options={["none", "small", "medium", "large", "full"]}
+              selectedRadius={selectedRadius}
+              onChange={handleRadiusChange}
+            />
+          </div>
+          <div>
+            <SpacingSelector
+              options={["none", "small", "medium", "large", "full"]}
+              selectedSpacing={selectedSpacing}
+              onChange={handleSpacingChange}
+            />
+          </div>
+        </div>
+      </div>
 
-      <div>
-        <ColorPicker
-          colors={ColorPickerColors}
-          defaultColor={color}
-          onChange={(color) => setColor(color)}
-        />
-      </div>
-      <div>
-        <SelectOptions
-          options={["outline", "filled", "text"]}
-          selectedOption={selectedOption}
-          onChange={handleOptionChange}
-        />
-      </div>
-      <div>
-        <RadiusSelector
-          options={["none", "small", "medium", "large", "full"]}
-          selectedRadius={selectedRadius}
-          onChange={handleRadiusChange}
-        />
-      </div>
-      <div>
-        <SpacingSelector
-          options={["none", "small", "medium", "large", "full"]}
-          selectedSpacing={selectedSpacing}
-          onChange={handleSpacingChange}
-        />
-      </div>
       <button
         onClick={createDynamicElement}
         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mt-4">
