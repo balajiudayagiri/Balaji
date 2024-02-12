@@ -4,6 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { router } from "./routes";
 import { RouterProvider } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.ready.then((registration) => {
@@ -14,7 +15,9 @@ if ("serviceWorker" in navigator) {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RecoilRoot>
+      <RouterProvider router={router} />
+    </RecoilRoot>
   </React.StrictMode>
 );
 

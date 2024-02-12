@@ -4,8 +4,8 @@ import { ColorPickerColors, elementOptions } from "../constants";
 import SearchSelect from "./SearchSelect";
 import ColorPicker from "./ColorPicker";
 import SelectOptions from "./SelectOptions";
-import RadiusSelector from "./RadiusSelector";
-import SpacingSelector from "./SpacingSelect";
+import { useRecoilState } from "recoil";
+import { darkModeState } from "../states/recoilAtoms";
 
 const ElementGenerator = () => {
   const [state, setState] = useState({
@@ -18,6 +18,7 @@ const ElementGenerator = () => {
   const [color, setColor] = useState("#007bff");
   const [selectedRadius, setSelectedRadius] = useState("medium");
   const [selectedSpacing, setSelectedSpacing] = useState("medium");
+  const [darkMode] = useRecoilState(darkModeState);
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);
@@ -116,7 +117,8 @@ const ElementGenerator = () => {
   };
 
   return (
-    <div className="text-white min-h-screen p-4">
+    <div
+      className={`${darkMode ? "text-white" : "text-black"} min-h-screen p-4`}>
       <h1 className="text-3xl font-bold mb-4">React Element Generator</h1>
       <IFrameWrapper>
         {React.createElement(
@@ -127,7 +129,11 @@ const ElementGenerator = () => {
       </IFrameWrapper>
       <div className="mb-4 md:flex md:space-x-4">
         <div className="mb-4 md:w-1/2">
-          <label htmlFor="element-type" className="block mb-1 text-gray-300">
+          <label
+            htmlFor="element-type"
+            className={`block mb-1 ${
+              darkMode ? "text-gray-300" : "text-black"
+            }`}>
             Element Type:
           </label>
           <SearchSelect
@@ -138,14 +144,20 @@ const ElementGenerator = () => {
           />
         </div>
         <div className="mb-4 md:w-1/2">
-          <label htmlFor="element-content" className="block mb-1 text-gray-300">
+          <label
+            htmlFor="element-content"
+            className={`block mb-1 ${
+              darkMode ? "text-gray-300" : "text-black"
+            }`}>
             Content:
           </label>
           <input
             type="text"
             id="element-content"
             placeholder="e.g., Hello, World!"
-            className="border border-gray-600 rounded p-2 w-full bg-gray-700 text-gray-300"
+            className={`border border-gray-600 rounded p-2 w-full ${
+              darkMode ? "bg-gray-700 text-gray-300" : "bg-white text-black"
+            }`}
             value={state.content}
             onChange={(e) => setState({ ...state, content: e.target.value })}
           />
@@ -168,16 +180,16 @@ const ElementGenerator = () => {
             />
           </div>
           <div>
-            <RadiusSelector
+            <SelectOptions
               options={["none", "small", "medium", "large", "full"]}
-              selectedRadius={selectedRadius}
+              selectedOption={selectedRadius}
               onChange={handleRadiusChange}
             />
           </div>
           <div>
-            <SpacingSelector
+            <SelectOptions
               options={["none", "small", "medium", "large", "full"]}
-              selectedSpacing={selectedSpacing}
+              selectedOption={selectedSpacing}
               onChange={handleSpacingChange}
             />
           </div>
@@ -186,12 +198,24 @@ const ElementGenerator = () => {
 
       <button
         onClick={createDynamicElement}
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mt-4">
+        className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 mt-4 ${
+          darkMode ? "bg-gray-700" : ""
+        }`}>
         Generate Element
       </button>
 
-      <h2 className="text-2xl font-bold mt-4 text-gray-300">Generated Code</h2>
-      <pre className="bg-gray-700 p-4 rounded overflow-auto">
+      <h2
+        className={`text-2xl font-bold mt-4 ${
+          darkMode ? " text-gray-300" : "bg-white text-black"
+        }`}>
+        Generated Code
+      </h2>
+      <pre
+        className={`p-4 rounded overflow-auto ${
+          darkMode
+            ? "bg-gray-700  text-white"
+            : " border-2 border-zinc-300 rounded text-black"
+        }`}>
         {state.reactCode}
       </pre>
     </div>

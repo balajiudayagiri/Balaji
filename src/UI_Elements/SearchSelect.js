@@ -1,10 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useRecoilState } from "recoil";
+import { darkModeState } from "../states/recoilAtoms";
 
 export default function SearchSelect({ className, style, options, onSelect }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [showOptions, setShowOptions] = useState(false);
   const selectRef = useRef(null);
+  const [darkMode] = useRecoilState(darkModeState);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -32,14 +35,18 @@ export default function SearchSelect({ className, style, options, onSelect }) {
 
   return (
     <div
-      className={`relative bg-black text-gray-300 ${className}`}
+      className={`relative ${
+        darkMode ? "bg-gray-800" : "bg-white"
+      } text-gray-300 ${className}`}
       style={style}
       ref={selectRef}>
       <input
         type="search"
         id="element-type"
         placeholder="Search element"
-        className="border border-gray-600 rounded p-2 w-full bg-inherit "
+        className={`border border-gray-600 rounded p-2 w-full ${
+          darkMode ? "bg-inherit text-white" : "bg-inherit text-black"
+        }`}
         value={searchTerm}
         onChange={(e) => {
           setSearchTerm(e.target.value);
@@ -48,11 +55,18 @@ export default function SearchSelect({ className, style, options, onSelect }) {
         onClick={() => setShowOptions(true)}
       />
       {showOptions && (
-        <div className="absolute bg-inherit w-full mt-1 border border-gray-600 rounded max-h-96 overflow-y-scroll">
+        <div
+          className={`absolute ${
+            darkMode ? "dark:bg-inherit" : "bg-inherit text-black"
+          } w-full mt-1 border border-gray-600 rounded max-h-96 overflow-y-scroll`}>
           {filteredOptions.map((option) => (
             <div
               key={option}
-              className="p-2 cursor-pointer hover:bg-gray-600"
+              className={`p-2 cursor-pointer${
+                darkMode
+                  ? " hover:bg-gray-600"
+                  : " hover:bg-blue-500 hover:text-white"
+              }`}
               onClick={() => handleElementTypeChange(option)}>
               {option}
             </div>
