@@ -11,11 +11,11 @@ const GradientDisplay = () => {
 
     for (let i = 0; i < 360; i++) {
       const gradient = rootStyles
-        .getPropertyValue(`--pcui-gradient-background-${i}`)
+        .getPropertyValue(`--gradient-background-${i}`)
         .trim();
       if (gradient) {
         loadedGradients.push({
-          name: `--pcui-gradient-background-${i}`,
+          name: `--gradient-background-${i}`,
           gradient,
         });
       }

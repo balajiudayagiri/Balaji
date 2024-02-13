@@ -3,8 +3,14 @@ import PropTypes from "prop-types";
 import { useRecoilState } from "recoil";
 import { darkModeState } from "../states/recoilAtoms";
 
-export default function SearchSelect({ className, style, options, onSelect }) {
-  const [searchTerm, setSearchTerm] = useState("");
+export default function SearchSelect({
+  className,
+  defaultValue,
+  style,
+  options,
+  onSelect,
+}) {
+  const [searchTerm, setSearchTerm] = useState(defaultValue || "");
   const [showOptions, setShowOptions] = useState(false);
   const selectRef = useRef(null);
   const [darkMode] = useRecoilState(darkModeState);
@@ -82,4 +88,5 @@ SearchSelect.propTypes = {
   style: PropTypes.object,
   options: PropTypes.array.isRequired,
   onSelect: PropTypes.func.isRequired,
+  defaultValue: PropTypes.string,
 };

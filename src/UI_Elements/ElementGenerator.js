@@ -16,19 +16,14 @@ const ElementGenerator = () => {
   const [style, setStyle] = useState({});
   const [selectedOption, setSelectedOption] = useState("outline");
   const [color, setColor] = useState("#007bff");
+  const [bgcolor, setbgColor] = useState("#007bff");
+
   const [selectedRadius, setSelectedRadius] = useState("medium");
   const [selectedSpacing, setSelectedSpacing] = useState("medium");
   const [darkMode] = useRecoilState(darkModeState);
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);
-  };
-
-  const createDynamicElement = () => {
-    const { elementType, content } = state;
-    const element = document.createElement(elementType);
-    element.innerHTML = content;
-    setState({ ...state, reactCode: transposeCode(element.outerHTML, true) });
   };
 
   const handleRadiusChange = (radius) => {
@@ -62,6 +57,7 @@ const ElementGenerator = () => {
     switch (selectedOption) {
       case "outline":
         return {
+          backgroundColor: "transparent",
           borderRadius: getradius[selectedRadius],
           padding: getspacing[selectedSpacing],
           borderWidth: "2px",
@@ -71,12 +67,16 @@ const ElementGenerator = () => {
         };
       case "filled":
         return {
+          border: "none",
           borderRadius: getradius[selectedRadius],
           padding: getspacing[selectedSpacing],
-          backgroundColor: color,
+          backgroundColor: bgcolor,
+          color: color,
         };
       case "text":
         return {
+          backgroundColor: "transparent",
+          border: "none",
           borderRadius: getradius[selectedRadius],
           padding: getspacing[selectedSpacing],
           color: color,
@@ -87,6 +87,7 @@ const ElementGenerator = () => {
   }, [
     selectedOption,
     color,
+    bgcolor,
     selectedRadius,
     selectedSpacing,
     getradius,
@@ -97,7 +98,24 @@ const ElementGenerator = () => {
     setStyle(getStylesBasedOnOption());
   }, [getStylesBasedOnOption]);
 
-  const transposeCode = (htmlCode, isReact = false) => {
+  const createDynamicElement = () => {
+    const { elementType, content } = state;
+    const element = document.createElement(elementType);
+    element.innerHTML = content;
+    element.style = style;
+
+    const reactCode = transposeCode(element.outerHTML, true, {
+      style,
+      content,
+    });
+    setState({ ...state, reactCode });
+  };
+
+  const transposeCode = (
+    htmlCode,
+    isReact = false,
+    { style, content } = {}
+  ) => {
     if (!isReact) {
       return htmlCode;
     }
@@ -105,12 +123,18 @@ const ElementGenerator = () => {
     const element = document.createElement("div");
     element.innerHTML = htmlCode;
 
+    const inlineStyles = Object.keys(style).map(
+      (styleKey) => `${styleKey}: "${style[styleKey]}"`
+    );
+
     return `
       import React from 'react';
 
       function GeneratedComponent() {
         return (
-          ${element.outerHTML.trim()}
+          <${state.elementType} style={{${inlineStyles.join(", ")}}}>
+            ${content}
+          </${state.elementType}>
         );
       }
     `;
@@ -137,7 +161,7 @@ const ElementGenerator = () => {
             Element Type:
           </label>
           <SearchSelect
-            defaultOption={"button"}
+            defaultValue={"div"}
             options={elementOptions}
             onSelect={(value) => setState({ ...state, elementType: value })}
             className="w-full"
@@ -166,6 +190,15 @@ const ElementGenerator = () => {
       <div className="flex flex-wrap gap-2">
         <div>
           <ColorPicker
+            label={"Background Color"}
+            colors={ColorPickerColors}
+            defaultColor={bgcolor}
+            onChange={(color) => setbgColor(color)}
+          />
+        </div>
+        <div>
+          <ColorPicker
+            label={"Font Color"}
             colors={ColorPickerColors}
             defaultColor={color}
             onChange={(color) => setColor(color)}
@@ -174,6 +207,7 @@ const ElementGenerator = () => {
         <div className="flex flex-col gap-2">
           <div>
             <SelectOptions
+              label={"Variant"}
               options={["outline", "filled", "text"]}
               selectedOption={selectedOption}
               onChange={handleOptionChange}
@@ -181,6 +215,7 @@ const ElementGenerator = () => {
           </div>
           <div>
             <SelectOptions
+              label={"Radius"}
               options={["none", "small", "medium", "large", "full"]}
               selectedOption={selectedRadius}
               onChange={handleRadiusChange}
@@ -188,6 +223,7 @@ const ElementGenerator = () => {
           </div>
           <div>
             <SelectOptions
+              label={"Spacing"}
               options={["none", "small", "medium", "large", "full"]}
               selectedOption={selectedSpacing}
               onChange={handleSpacingChange}

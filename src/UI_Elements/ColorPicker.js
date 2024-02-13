@@ -7,6 +7,7 @@ const ColorPicker = ({
   colors = ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF"],
   onChange,
   defaultColor,
+  label,
 }) => {
   const [chosenColor, setChosenColor] = useState(defaultColor);
   const [darkMode] = useRecoilState(darkModeState);
@@ -26,7 +27,7 @@ const ColorPicker = ({
         className={`text-2xl font-semibold mb-4 text-${
           !darkMode ? "white" : "text-gray-800"
         }`}>
-        Color Picker
+        {label || "Color Picker"}
       </h1>
 
       <div
@@ -51,6 +52,7 @@ const ColorPicker = ({
               className="min-w-6 min-h-6 rounded-full"
               style={{
                 backgroundColor: color,
+                border: `1px solid ${darkMode ? "#fff" : "#333"}`,
                 outline: `2px solid ${
                   chosenColor === color ? "#fff" : "transparent"
                 }`,
@@ -69,6 +71,7 @@ ColorPicker.propTypes = {
   onChange: PropTypes.func,
   defaultColor: PropTypes.string,
   darkMode: PropTypes.bool,
+  label: PropTypes.string,
 };
 
 export default ColorPicker;

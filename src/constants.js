@@ -183,6 +183,9 @@ export const elementOptions = [
 ];
 
 export const ColorPickerColors = [
+  "transparent",
+  "#000000",
+  "#ffffff",
   "#e8153f",
   "#fe0e0e",
   "#de4150",

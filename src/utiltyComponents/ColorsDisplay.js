@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import colors from "../colors"; // Update the path accordingly
+import useToaster from "../hooks/useToaster";
 
 const ColorDisplay = () => {
   const [copiedColor, setCopiedColor] = useState("");
+  const toast = useToaster();
 
   const copyToClipboard = (color) => {
     navigator.clipboard
@@ -14,6 +16,7 @@ const ColorDisplay = () => {
       .catch((err) => {
         console.error("Error copying to clipboard: ", err);
       });
+    toast.success(`color ${color} copied`);
   };
 
   return (

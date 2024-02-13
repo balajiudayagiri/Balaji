@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { darkModeState } from "../states/recoilAtoms";
 import { useRecoilState } from "recoil";
 
-const SelectOptions = ({ options, selectedOption, onChange }) => {
+const SelectOptions = ({ options, selectedOption, onChange, label }) => {
   const [darkMode] = useRecoilState(darkModeState);
 
   return (
@@ -17,7 +17,7 @@ const SelectOptions = ({ options, selectedOption, onChange }) => {
         className={`text-2xl font-semibold mb-4 ${
           darkMode ? "text-white" : "text-black"
         }`}>
-        Variant
+        {label || "Variant"}
       </h1>
       <div className="flex gap-4 flex-wrap">
         {options.map((option) => (
@@ -42,6 +42,7 @@ const SelectOptions = ({ options, selectedOption, onChange }) => {
 SelectOptions.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedOption: PropTypes.string.isRequired,
+  label: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };
 
