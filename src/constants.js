@@ -16,7 +16,6 @@ export const navigation = [
 ];
 
 export const tabsLinks = [
-  { label: "Element Generator", href: "elementgenerator" },
   { label: "Gradients", href: "gradientdisplay" },
   { label: "Colors", href: "colorsdisplay" },
 ];

@@ -38,12 +38,12 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <ElementGenerator />,
+            element: <GradiantPage />,
           },
-          {
-            path: "elementgenerator",
-            element: <ElementGenerator />,
-          },
+          // {
+          //   path: "elementgenerator",
+          //   element: <ElementGenerator />,
+          // },
           {
             path: "gradientdisplay",
             element: <GradiantPage />,
