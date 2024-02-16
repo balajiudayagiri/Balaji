@@ -10,7 +10,6 @@ import App from "./App";
 
 import ErrorPage from "./ErrorPage";
 import { Projects } from "./components/Projects";
-import ElementGenerator from "./UI_Elements/ElementGenerator";
 import GradiantPage from "./components/GradiantPage";
 import ColorPage from "./components/ColorPage";
 
