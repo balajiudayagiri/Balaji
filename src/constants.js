@@ -18,6 +18,8 @@ export const navigation = [
 export const tabsLinks = [
   { label: "Gradients", href: "gradientdisplay" },
   { label: "Colors", href: "colorsdisplay" },
+  { label: "Pong", href: "Pong" },
+  { label: "Image Color Extractor", href: "imagecolorextractor" },
 ];
 
 export const articles = [

@@ -12,7 +12,10 @@ export default function App() {
   };
 
   return (
-    <div className={`${isDarkMode ? "dark:bg-black" : "light:bg-white"}`}>
+    <div
+      className={` h-[100vh] ${
+        isDarkMode ? "dark:bg-black" : "light:bg-white "
+      }`}>
       <div
         className={`relative pt-[120px] mx-auto sm:w-10/12 w-[93%] ${
           isDarkMode ? "dark:bg-black" : "light:bg-white"
