@@ -1,0 +1,15 @@
+.soft-element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: var(--size);
+    height: var(--size);
+    border-radius: var(--radius);
+}
+
+.soft-shadow {
+    background: linear-gradient(var(--angle), var(--firstGradientColor), var(--secondGradientColor));
+    box-shadow: var(--positionX) var(--positionY) var(--blur) var(--darkColor),
+        var(--positionXOpposite) var(--positionYOpposite) var(--blur) var(--lightColor);
+}

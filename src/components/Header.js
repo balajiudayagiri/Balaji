@@ -4,17 +4,12 @@ import { navigation } from "../constants";
 import PicImage from "../assets/Balaji.png";
 import { Menu, Transition } from "@headlessui/react";
 import Bars3Icon from "../Icons/Bars3Icon";
-import { useRecoilState } from "recoil";
-import { darkModeState } from "../states/recoilAtoms";
-import SunIcon from "../Icons/SunColoredIcon";
-import MoonIcon from "../Icons/MoonIcon";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Header() {
-  const [darkMode, setdarkMode] = useRecoilState(darkModeState);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
@@ -43,10 +38,10 @@ export default function Header() {
     }
     // eslint-disable-next-line
   }, [lastScrollY]);
-  const toggleDarkMode = () => {
-    setdarkMode((prevMode) => !prevMode);
-    // You can add logic to update your application's theme based on darkMode state
-  };
+  // const toggleDarkMode = () => {
+  //   setdarkMode((prevMode) => !prevMode);
+  //   // You can add logic to update your application's theme based on darkMode state
+  // };
   return (
     <header
       className={`z-10 flex justify-between fixed top-0 xl:px-36 lg:px-32 md:px-24 sm:px-16 px-11 py-10 left-0 w-full bg-transparent transition-transform duration-300 ${
@@ -57,17 +52,13 @@ export default function Header() {
           src={PicImage}
           height={40}
           width={40}
-          className={`rounded-full border-solid border-2  ${
-            darkMode ? "border-zinc-800" : "border-white"
-          } outline outline-2 outline-zinc-600 shadow-lg hover:outline-cyan-200 `}
+          className={`rounded-full border-solid border-2  ${"border-white"} outline outline-2 outline-zinc-600 shadow-lg hover:outline-cyan-200 `}
           alt="pic"
         />
       </Link>
 
       <div
-        className={`hidden xl:flex lg:flex md:flex sm:flex ${
-          darkMode ? "bg-zinc-800" : "bg-white"
-        } w-fit px-6 rounded-full  gap-6 shadow-md`}>
+        className={`hidden xl:flex lg:flex md:flex sm:flex ${"bg-white"} w-fit px-6 rounded-full  gap-6 shadow-md`}>
         {navigation.map(({ name, href }, index) => {
           const isCurrent = location.pathname.includes(href);
 
@@ -76,20 +67,18 @@ export default function Header() {
               key={`${name}_${index}`}
               to={href}
               className={`${
-                isCurrent
-                  ? "text-cyan-500 "
-                  : `${darkMode ? "text-white" : "text-zinc-800"}`
+                isCurrent ? "text-cyan-500 " : `text-zinc-800`
               } hover:text-cyan-500 py-2 font-semibold`}>
               {name}
             </Link>
           );
         })}
       </div>
-      <button
+      {/* <button
         onClick={toggleDarkMode}
         className="rounded-full w-10 h-10 p-2 text-gray-400 ">
         {darkMode ? <SunIcon /> : <MoonIcon />}
-      </button>
+      </button> */}
       <Menu as="div" className="xl:hidden lg:hidden md:hidden sm:hidden block">
         <div>
           <Menu.Button className="relative bg-gray-800 text-sm focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 inline-flex items-center justify-center rounded-full p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-inset focus:ring-white">

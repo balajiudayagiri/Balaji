@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { darkModeState } from "../states/recoilAtoms";
+import { darkModeState } from "../../states/recoilAtoms";
 import { useRecoilState } from "recoil";
 
 const ColorPicker = ({

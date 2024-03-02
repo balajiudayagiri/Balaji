@@ -18,8 +18,10 @@ export const navigation = [
 export const tabsLinks = [
   { label: "Gradients", href: "gradientdisplay" },
   { label: "Colors", href: "colorsdisplay" },
-  { label: "Pong", href: "Pong" },
+  // { label: "Pong", href: "Pong" },
   { label: "Image Color Extractor", href: "imagecolorextractor" },
+  // { label: "Snackgame", href: "Snackgame" },
+  { label: "Neumorphism", href: "Neumorphism" },
 ];
 
 export const articles = [

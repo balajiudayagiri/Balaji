@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Button1 from "../AnimatedComponents/Button1/Button1";
 
-const Tabs = ({ tabs, darkMode = true }) => {
+const Tabs = ({ tabs }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (index) => {
@@ -10,23 +11,15 @@ const Tabs = ({ tabs, darkMode = true }) => {
   };
 
   return (
-    <div className={`tabs-container ${darkMode ? "dark" : ""} mb-8`}>
-      <div className={`flex flex-wrap space-x-4 ${darkMode ? "dark" : ""}`}>
+    <div className={`tabs-container  mb-8`}>
+      <div className={`flex flex-wrap gap-5  `}>
         {tabs?.map((tab, index) => (
           <Link key={index} to={tab.href}>
-            <div
-              className={`w-full sm:w-auto md:w-auto lg:w-auto xl:w-auto cursor-pointer px-4 py-2 rounded-md mb-2 ${
-                index === activeTab
-                  ? darkMode
-                    ? "bg-cyan-500 text-white"
-                    : "bg-blue-500 text-white"
-                  : darkMode
-                  ? "bg-gray-800 text-gray-300"
-                  : "bg-gray-200 text-gray-700"
-              }`}
+            <Button1
+              className={`${activeTab === index && ""}`}
               onClick={() => handleTabClick(index)}>
               {tab.label}
-            </div>
+            </Button1>
           </Link>
         ))}
       </div>

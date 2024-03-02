@@ -1,5 +1,5 @@
 import React from "react";
-import GradientDisplay from "../utiltyComponents/GradientDisplay";
+import GradientDisplay from "../../utiltyComponents/GradientDisplay";
 
 export default function GradiantPage() {
   return (

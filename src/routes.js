@@ -10,10 +10,12 @@ import App from "./App";
 
 import ErrorPage from "./ErrorPage";
 import { Projects } from "./components/Projects";
-import GradiantPage from "./components/GradiantPage";
-import ColorPage from "./components/ColorPage";
-import Pong from "./components/Pong";
-import ImageColorExtractor from "./UI_Elements/ImageColorExtractor";
+import GradiantPage from "./Projects/ColorPicker/GradiantPage";
+import ColorPage from "./Projects/ColorPicker/ColorPage";
+// import Pong from "./components/Pong";
+import Neumorphism from "./Projects/neumorphism/Neumorphism";
+import ImageColorExtractor from "./Projects/ImageColorExtractor/ImageColorExtractor";
+// import Snackgame from "./UI_Elements/Snackgame";
 
 export const router = createBrowserRouter([
   {
@@ -45,10 +47,14 @@ export const router = createBrowserRouter([
           //   path: "elementgenerator",
           //   element: <ElementGenerator />,
           // },
-          {
-            path: "Pong",
-            element: <Pong />,
-          },
+          // {
+          //   path: "Pong",
+          //   element: <Pong />,
+          // },
+          // {
+          //   path: "Snackgame",
+          //   element: <Snackgame />,
+          // },
           {
             path: "gradientdisplay",
             element: <GradiantPage />,
@@ -60,6 +66,10 @@ export const router = createBrowserRouter([
           {
             path: "imagecolorextractor",
             element: <ImageColorExtractor />,
+          },
+          {
+            path: "Neumorphism",
+            element: <Neumorphism />,
           },
         ],
       },

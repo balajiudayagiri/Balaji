@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
-import { darkModeState } from "../states/recoilAtoms";
-import { rgbStringToAllColors } from "../utilitys";
+import { darkModeState } from "../../states/recoilAtoms";
+import { rgbStringToAllColors } from "../../utilitys";
 
 const ImageColorExtractor = () => {
   const [isDarkMode] = useRecoilState(darkModeState);

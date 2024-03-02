@@ -1,5 +1,5 @@
 import React from "react";
-import ColorDisplay from "../utiltyComponents/ColorsDisplay";
+import ColorDisplay from "../../utiltyComponents/ColorsDisplay";
 
 export default function ColorPage() {
   return (

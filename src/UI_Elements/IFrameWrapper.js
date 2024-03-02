@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import PropTypes from "prop-types";
 
-const IFrameWrapper = ({ children }) => {
+const IFrameWrapper = ({ children, className }) => {
   const iframeRef = useRef(null);
 
   useEffect(() => {
@@ -31,10 +31,8 @@ const IFrameWrapper = ({ children }) => {
     root.style.margin = "0px auto";
     document.body.appendChild(root);
 
-    window.ReactDOM.render(
-      <React.StrictMode>{children}</React.StrictMode>,
-      root
-    );
+    const rootInstance = window.ReactDOM.createRoot(root);
+    rootInstance.render(<React.StrictMode>{children}</React.StrictMode>);
   }, [children]);
 
   return (
@@ -43,13 +41,14 @@ const IFrameWrapper = ({ children }) => {
       ref={iframeRef}
       width="100%"
       height="300px"
-      className="border border-gray-600 rounded"
+      className={`border border-gray-600 rounded ${className}`}
     />
   );
 };
 
 IFrameWrapper.propTypes = {
   children: PropTypes.node,
+  className: PropTypes.string,
 };
 
 export default IFrameWrapper;
