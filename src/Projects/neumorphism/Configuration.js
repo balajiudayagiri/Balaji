@@ -81,7 +81,7 @@ const Configuration = ({ previewBox, activeLightSource = 1 }) => {
     const { maxSize, size } = getSizes();
     setMaxSize(maxSize);
     setSize(size);
-  }, []);
+  }, [setMaxSize, color]);
 
   useEffect(() => {
     if (!isValidColor(color)) {
@@ -179,7 +179,19 @@ background: ${background};
 box-shadow: ${firstBoxShadow},
             ${secondBoxShadow}`
     );
-  });
+  }, [
+    activeLightSource,
+    blur,
+    color,
+    colorDifference,
+    distance,
+    gradient,
+    maxRadius,
+    previewBox,
+    radius,
+    shape,
+    size,
+  ]);
   return (
     <div className="configuration soft-shadow">
       <div className="row">
